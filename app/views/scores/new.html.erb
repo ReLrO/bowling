@@ -1,0 +1,5 @@
+<%= form_for @score, :url => { :action => "create"  }, :html => { :method => 'post'  } do |f|  %>
+	<%= f.label :score_string %><br />
+	<%= f.text_field :score_string %><br />
+	<%= f.submit 'Submit' %>
+<% end %>

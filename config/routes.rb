@@ -1,4 +1,8 @@
 Bowling::Application.routes.draw do
+  
+  resources :scores, :only => [:new, :create]
+  
+  root :to => 'scores#new'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

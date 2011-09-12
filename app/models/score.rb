@@ -1,5 +1,12 @@
 class Score 
+  include ActiveModel::Validations 
   
+  validates_presence_of :score_string
+  
+  attr_accessor :score_string
+  
+  def to_key
+  end
   
   def calculate score_string
       
@@ -15,16 +22,19 @@ class Score
   private
   
   def point position, score_array
+    result = 0
     if score_array[position] == "X"
-      if (position + 2).nil? == false && (position + 2) <= score_array.length-1
-        10 + translate(score_array[position + 1], score_array[position]) + translate(score_array[position + 2], score_array[position + 1])
+      unless position + 2  > score_array.length-1
+        result = 10 + translate(score_array[position + 1], score_array[position]) + translate(score_array[position + 2], score_array[position + 1])
       end
     elsif score_array[position] == "/"
-      translate(score_array[position], score_array[position - 1]) + translate(score_array[position + 1], score_array[position])
+        result = translate(score_array[position], score_array[position - 1]) + translate(score_array[position + 1], score_array[position])
     else
-      translate(score_array[position],0)
+      unless (score_array[position-1] == "/") && (position == score_array.length-1)
+        result = translate(score_array[position],0)
+      end
     end
-  
+    result
   end
   
   def translate point, previous_point

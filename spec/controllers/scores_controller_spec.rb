@@ -37,7 +37,7 @@ describe ScoresController do
       
       it "should have the right title" do
         post :create, :score => @attr
-        respons.should have_selector("title", :content => "Enter your score" )        
+        response.should have_selector("title", :content => "Enter your score" )        
       end
       
       it "should have a flash.now message" do
